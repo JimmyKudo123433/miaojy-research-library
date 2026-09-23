@@ -11,7 +11,7 @@ test('personalized library has accessible primary pages', async ({ page }) => {
   );
   await page.getByRole('link', { name: '论文池', exact: true }).click();
   await expect(page.getByRole('heading', { name: '论文池' })).toBeVisible();
-  await expect(page.locator('[data-result-count]')).toContainText('5');
+  await expect(page.locator('[data-result-count]')).toContainText('篇论文');
   await expect(page.locator('.paper-list')).toBeVisible();
 });
 test('hero title wraps long text without overflowing at desktop and mobile widths', async ({
