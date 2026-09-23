@@ -25,6 +25,11 @@
       "paper_id": "terrain-inclination-stability-region-two-wheeled-robot-2012",
       "primary": false,
       "run_type": "manual"
+    },
+    {
+      "paper_id": "control-longitudinally-extended-twipr-sliding-mechanism-2025",
+      "primary": false,
+      "run_type": "scheduled"
     }
   ]
 }

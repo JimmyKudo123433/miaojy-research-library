@@ -1,0 +1,156 @@
+{
+  "id": "control-longitudinally-extended-twipr-sliding-mechanism-2025",
+  "title": "Control of a longitudinally extended two-wheeled inverted pendulum robot with a sliding mechanism",
+  "authors": [
+    "David Kim",
+    "Dongil Choi"
+  ],
+  "year": 2025,
+  "publication_date": "2025-09-25",
+  "venue_or_source": "Journal of Computational Design and Engineering, 12(10), 118–132",
+  "venue_type": "Journal",
+  "ranking": {
+    "ccf": null,
+    "cas": null,
+    "jcr": null,
+    "ranking_year": null,
+    "ranking_source": null
+  },
+  "identifiers": {
+    "doi": "10.1093/jcde/qwaf098",
+    "arxiv": null,
+    "openreview": null
+  },
+  "urls": {
+    "paper": "https://academic.oup.com/jcde/article/12/10/118/8263931",
+    "code": null
+  },
+  "topics": [
+    "两轮倒立摆",
+    "模型预测控制",
+    "扰动观测器",
+    "坡度估计",
+    "质心补偿",
+    "VESC/CAN"
+  ],
+  "relevance": "High",
+  "reading_basis": "official_html",
+  "quick_read": {
+    "tldr": "针对纵向加长的两轮倒立摆机器人，作者把轮端控制、纵向滑块、扰动观测器和模型预测控制结合起来，用滑块主动补偿持续外力与质心偏移，并用前后测距传感器估计坡度。实车在不平衡载荷下可稳定行驶到 1.5 m/s，并完成约 8° 斜坡的上坡、坡中停车和下坡。对当前课题最有价值的是“地形估计—扰动估计—参考生成—约束控制—VESC 执行”的完整闭环。",
+    "problem_and_motivation": "普通两轮倒立摆主要依靠轮端力矩维持俯仰平衡。当持续外力或偏置载荷使质心长期偏移时，仅靠车轮会迫使车体持续倾斜，严重时会触地或失稳；进入斜坡后，重力分量和离地间隙也会改变。作者因此增加纵向滑块，使系统能直接移动质心并适应载荷和坡地。",
+    "core_method": "作者建立含车体、车轮、纵向滑块和坡度的动力学模型。MPC 在状态与输入约束下计算轮端控制量；扰动观测器估计持续外力，并把外力补偿和坡度补偿转换为滑块位置参考。前后测距传感器与 IMU 联合估计坡角，再调整车体角度参考。实车轮毂电机使用 VESC 6 MK V，通过 1 Mbps CAN 控制。",
+    "key_results": "0.25 kg 偏置载荷下，普通 LQR 最终使车体触地，而所提方法约 2.14 s 达到稳态。3.8 kg 偏置载荷下机器人最高稳定行驶到 1.5 m/s。带 1 kg 载荷时，系统成功通过约 8° 斜坡并能坡中停车；取消坡度补偿后无法正常爬坡且会下滑。",
+    "why_it_matters": "论文与当前实车路线高度接近：同样是两轮自平衡平台、VESC/CAN、状态反馈和约束控制，而且把坡度感知直接送入稳定控制。虽然重点是纵向俯仰而非横向侧倾，但该架构可直接迁移到横坡角、左右轮载荷差和侧向扰动。"
+  },
+  "detail": {
+    "motivation": "两轮倒立摆机器人本身在俯仰方向不稳定，传统方案主要依靠轮端力矩维持直立。论文指出，当载荷位置变化或持续外力导致质心偏移时，单靠车轮补偿会形成持续倾角，严重时甚至触地。作者因此把“移动质心”作为第二种稳定手段：轮端负责快速平衡和行驶，滑块负责补偿慢变化或持续存在的载荷与坡度影响。\n\n斜坡还带来另一个问题：单靠 IMU 难以直接区分车体俯仰和地面坡角。论文加入前后测距传感器估计地面倾角，再把坡度同时送入车体角度参考和滑块参考，使控制系统从单纯姿态反馈扩展为包含地形感知和扰动估计的闭环。",
+    "contributions": [
+      {
+        "contribution": "提出面向纵向加长两轮倒立摆机器人的轮端控制与纵向滑块协同稳定方案，用滑块调节质心，以补偿持续外力和不平衡载荷。",
+        "source": "Introduction; Section 3.3 Slider reference generation"
+      },
+      {
+        "contribution": "将模型预测控制与扰动观测器组合：MPC 在状态/输入约束下计算轮端控制量，扰动观测器估计外力并形成滑块补偿参考。",
+        "source": "Section 3.1 Model predictive control; Section 3.2 Disturbance observer; Section 3.3"
+      },
+      {
+        "contribution": "利用前后测距传感器与 IMU 分离车体俯仰和坡面倾角，并将坡度用于车体角度与滑块位置参考生成。",
+        "source": "Section 2.3 Slope estimation; Equation (3); Section 3.3"
+      },
+      {
+        "contribution": "在实车上验证不平衡载荷、最高 1.5 m/s 行驶和约 8° 坡道工况，并给出 LQR 与无坡度补偿对照。",
+        "source": "Sections 4.3–4.5; Figures 12–21; Table 7"
+      }
+    ],
+    "research_questions": [
+      {
+        "type": "inferred",
+        "question": "对于纵向加长的两轮倒立摆机器人，能否通过“轮端 MPC + 扰动观测 + 主动移动质心 + 坡度估计”在持续质心偏移和斜坡条件下保持稳定平衡与行驶？",
+        "original_question": null,
+        "how": "作者建立含滑块与坡度的动力学，设计 MPC、扰动观测器和滑块参考生成器，并利用前后测距传感器估计坡角；随后在实车上进行自平衡、偏置载荷、载荷行驶、坡度估计和坡道行驶实验。",
+        "answer": "在论文测试范围内，该组合能提高持续质心偏移和坡道工况下的稳定性：偏置载荷时可以恢复稳态，3.8 kg 偏置载荷下可稳定行驶到 1.5 m/s，带 1 kg 载荷可通过约 8° 坡面并坡中停车。",
+        "meaning": "地形和持续扰动可以先被估计，再通过额外可控自由度分担车轮长期稳定负担。这一思路可迁移到横向侧倾稳定中的横坡补偿、主动质心调节或附加执行器设计。",
+        "source": "Introduction, paragraphs describing CoM shift, sliding mechanism objective, and inclined-slope challenge"
+      }
+    ],
+    "research_questions_empty_reason": null,
+    "research_questions_empty_source": null,
+    "method": "硬件由两台轮毂电机、纵向滑块机构、IMU、前后超声测距传感器和主控 PC 构成。轮毂电机使用 VESC 6 MK V，并通过 1 Mbps CAN 与主控通信；滑块由 RMD X6 电机和编码器驱动，软件运行于 ROS/C++。\n\n作者用拉格朗日法建立含车体、车轮、滑块和坡度的动力学。MPC 以当前状态、滑块位置参考和车体角度参考为输入，在有限预测域内最小化状态误差和控制输入，并设置状态/输入上下界；二次规划由 OSQP 实时求解，斜坡工况加入重力前馈。\n\n扰动观测器估计未建模外力，并把持续外力等效为扰动力矩，再计算抵消该力矩所需的滑块位置。对于坡度，系统由前后测距值与传感器间距计算相对地面角度，再结合 IMU 得到坡角；坡角同时用于车体角度参考和滑块参考生成。",
+    "experiments_and_key_findings": "基础实验显示机器人可以从约 -16° 状态摆起，并在约 5 s 内使俯仰收敛。0.25 kg、距中心约 0.15 m 的偏置载荷下，普通 LQR 因无法消除持续质心偏移而逐渐倾斜并触地；所提方法利用扰动估计和滑块补偿，在约 2.14 s 后进入稳态。\n\n在前方约 0.15 m 处放置 3.8 kg 载荷时，机器人在载荷施加与移除过程中仍能恢复平衡；载荷行驶实验最高达到 1.5 m/s，并能在快速减速时保持稳定。\n\n坡度估计实验在约 8° 斜坡上改变机器人自身俯仰，估计坡度仍接近真实坡角。测距传感器原始频率为 12.5 Hz，经过滤波和插值后用于 500 Hz 控制循环。\n\n坡道实验中机器人携带约 1 kg 前置载荷完成上坡、坡中停车和下坡；启用坡度补偿时可以完成全过程，取消坡度补偿后无法正常上坡，并在无速度命令时沿坡下滑。Table 7 中三种载荷工况的速度 RMSE 不高于 0.323 m/s，俯仰角 RMSE 不高于约 4.23°。",
+    "limitations": {
+      "author_reported": [
+        "论文明确指出，当前滑块参考生成方法适合先在平地识别并补偿恒定偏置载荷，但不能直接处理机器人已经位于斜坡上时载荷继续动态变化的情况。"
+      ],
+      "ai_analysis": [
+        "实验地形主要是规则的约 8° 单一斜坡，尚未覆盖碎石、连续起伏、台阶、单轮越障或快速变化坡面，因此不能直接代表非结构化山地。",
+        "论文关注纵向俯仰与前后质心移动，没有建模横向侧倾、左右轮法向载荷差、横坡角或侧向滑移；迁移到当前课题时必须增加横滚自由度和左右轮接触条件。",
+        "坡度估计依赖车底前后两点测距，对强粗糙地面和局部障碍可能把局部几何误判为整体坡度，需要更鲁棒的局部地形法向估计。",
+        "LQR 对照主要展示持续载荷下的不足，没有系统分离 MPC、扰动观测器和新增滑块自由度各自带来的增益。"
+      ]
+    },
+    "relation_to_research": "对当前“复杂越野环境下 Segway 式无人智能车横向稳定控制”而言，最值得借鉴的是完整的系统架构：环境状态与持续扰动被显式估计并送入控制器，而不是让姿态反馈被动处理全部变化。\n\n在现有 Simulink 路线上，可把论文的纵坡角扩展为横坡角，并加入横滚角、横滚角速度、左右轮法向载荷或等效载荷转移，比较固定 LQR、增益调度 LQR 和带约束 MPC 在不同横坡与侧向冲击下的最大可恢复域。论文的“有/无坡度补偿”实验也可直接转化为“有/无横坡前馈补偿”的公平对照。\n\n实车方面，论文使用 VESC 6 MK V + CAN + ROS/C++，与计划中的 VCU→VESC 扭矩/电流控制结构十分接近，可参考其“底层 VESC 管电机，上层负责状态估计、扰动估计和参考/扭矩生成”的分层方式。",
+    "what_can_be_done_next": [
+      {
+        "title": "把纵坡补偿扩展为横坡稳定补偿",
+        "rationale": "本文说明坡度显式进入动力学和参考量后能显著改变坡地平衡效果；当前课题真正关心的是横坡和侧倾。",
+        "concrete_plan": "在现有 Segway 非线性模型中加入横滚角、横坡角、左右轮接触高度差和法向载荷，以横坡角生成横滚参考或左右轮差动扭矩前馈。",
+        "validation": "扫描 0°、5°、10°、15° 横坡和不同初始横滚状态，比较无补偿与地形补偿下的最大可恢复区域、调节时间、轮离地率和峰值扭矩。",
+        "expected_value": "把本文的坡地感知闭环直接迁移到横向稳定主线，并形成可量化的稳定增益。",
+        "source": "Sections 2.3, 3.3, 4.5"
+      },
+      {
+        "title": "建立扰动观测器加双轮扭矩基线",
+        "rationale": "本文用扰动观测器区分持续外力，避免基础平衡控制长期承担静态偏置；该思想也适用于横向外力和偏载。",
+        "concrete_plan": "把横向等效扰动力矩或未知载荷变化作为待估量，设计 DOB/ESO，再将估计量用于左右轮扭矩分配或横滚参考修正，先不增加额外机械执行器。",
+        "validation": "施加阶跃侧向力、偏置载荷、单侧附着变化与模型参数误差，比较 LQR、LQR+DOB、MPC+DOB 的姿态峰值、恢复时间和扭矩饱和次数。",
+        "expected_value": "判断在不增加反作用飞轮或 CMG 时，仅靠扰动估计和双轮扭矩还能获得多少横向鲁棒性。",
+        "source": "Sections 3.2–3.3; Section 4.3"
+      },
+      {
+        "title": "复现约束 MPC 并与现有 LQR 公平比较",
+        "rationale": "论文的 MPC 明确处理状态和控制输入约束，而当前仿真已在做 LQR、饱和和最大可恢复角测试。",
+        "concrete_plan": "在当前四状态 Segway 模型上实现线性 MPC，设置与 LQR 相同状态、相同 TΣ 饱和、相同初始条件和采样时间，再加入坡度或参数变化。",
+        "validation": "进行 5° 初始角、初始角扫描、外力扰动和执行器饱和四组实验，统一比较最大倾角、调节时间、位置偏移、最大速度、最大控制转矩和最大可恢复角。",
+        "expected_value": "形成比 PD/LQR 更完整的约束控制基线，并与论文方法建立直接可追溯联系。",
+        "source": "Section 3.1; Equation (4); Section 4"
+      },
+      {
+        "title": "把规则坡度估计升级为非结构化地形法向估计",
+        "rationale": "论文的前后两点测距适合单一坡面，但非结构化山地的局部几何不能稳定地由两点直线表示。",
+        "concrete_plan": "保留 IMU 作为车体姿态基准，将前后测距扩展为激光或深度相机局部点云，拟合左右轮前方局部地面平面或法向，输出纵坡、横坡和粗糙度置信度。",
+        "validation": "在规则斜坡、波浪路、单侧凸起、碎石和局部台阶场景比较两点估计与局部平面估计的角度误差及其对稳定控制的影响。",
+        "expected_value": "把本文可落地的坡地闭环扩展到当前课题真正需要的非结构化山地场景。",
+        "source": "Section 2.3; Section 4.4"
+      }
+    ]
+  },
+  "original_abstract": null,
+  "bibtex": "@article{kim2025longitudinal, title={Control of a longitudinally extended two-wheeled inverted pendulum robot with a sliding mechanism}, author={Kim, David and Choi, Dongil}, journal={Journal of Computational Design and Engineering}, volume={12}, number={10}, pages={118--132}, year={2025}, doi={10.1093/jcde/qwaf098}}",
+  "figures": [],
+  "evidence": [
+    {
+      "claim": "轮毂电机使用 VESC 6 MK V 并通过 1 Mbps CAN 与主控通信。",
+      "locator": "Section 4.1, system configuration",
+      "url": "https://academic.oup.com/jcde/article/12/10/118/8263931"
+    },
+    {
+      "claim": "0.25 kg 偏置载荷实验中，LQR 对照最终触地，而所提方法约 2.14 s 达到稳态。",
+      "locator": "Section 4.3, Figures 12–13",
+      "url": "https://academic.oup.com/jcde/article/12/10/118/8263931"
+    },
+    {
+      "claim": "3.8 kg 偏置载荷下机器人最高稳定行驶到 1.5 m/s。",
+      "locator": "Section 4.3, Figures 16–17",
+      "url": "https://academic.oup.com/jcde/article/12/10/118/8263931"
+    },
+    {
+      "claim": "带 1 kg 载荷时机器人完成约 8° 坡道行驶并能坡中停车；无坡度补偿时无法正常上坡并出现下滑。",
+      "locator": "Section 4.5, Figures 19–21",
+      "url": "https://academic.oup.com/jcde/article/12/10/118/8263931"
+    }
+  ],
+  "generated_by": "ChatGPT scheduled research update (source-grounded synthesis)",
+  "generated_at": "2026-09-23T08:08:00Z",
+  "updated_at": "2026-09-23T08:08:00Z",
+  "owner_edited": false
+}
