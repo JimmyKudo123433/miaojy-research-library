@@ -1,15 +1,18 @@
 import { test, expect } from '@playwright/test';
-test('empty template has accessible primary pages', async ({ page }) => {
+test('personalized library has accessible primary pages', async ({ page }) => {
   await page.goto('/');
-  await expect(page.getByRole('heading', { name: '你的研究方向' })).toBeVisible();
+  await expect(
+    page.getByRole('heading', { name: '复杂越野环境下 Segway 式智能无人小车的横向稳定控制' }),
+  ).toBeVisible();
   await expect(page.locator('.eyebrow')).toContainText('研究知识库 ·');
   await expect(page.locator('.hero-subtitle')).toHaveText('研究知识库');
   await expect(page.locator('.hero .lede')).toHaveText(
-    '围绕你的研究方向，整理相关论文、方法与可复现研究证据。',
+    '围绕复杂越野环境中 Segway 式智能无人小车的横向稳定控制，整理两轮自平衡、地形适应、抗滑与鲁棒控制相关论文、方法和实验依据。',
   );
   await page.getByRole('link', { name: '论文池', exact: true }).click();
   await expect(page.getByRole('heading', { name: '论文池' })).toBeVisible();
-  await expect(page.getByText('还没有论文。')).toBeVisible();
+  await expect(page.locator('[data-result-count]')).toContainText('5');
+  await expect(page.locator('.paper-list')).toBeVisible();
 });
 test('hero title wraps long text without overflowing at desktop and mobile widths', async ({
   page,
