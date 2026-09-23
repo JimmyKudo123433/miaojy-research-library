@@ -1,0 +1,110 @@
+{
+  "id": "complex-terrain-two-wheel-self-balancing-stability-2024",
+  "title": "Research on Stability Control System of Two-Wheel Heavy-Load Self-Balancing Vehicles in Complex Terrain",
+  "authors": [
+    "Chunxiang Yan",
+    "Xiying Li"
+  ],
+  "year": 2024,
+  "publication_date": null,
+  "venue_or_source": "Applied Sciences, 14(17), 7682",
+  "venue_type": "Journal",
+  "ranking": {
+    "ccf": null,
+    "cas": null,
+    "jcr": null,
+    "ranking_year": null,
+    "ranking_source": null
+  },
+  "identifiers": {
+    "doi": "10.3390/app14177682",
+    "arxiv": null,
+    "openreview": null
+  },
+  "urls": {
+    "paper": "https://www.mdpi.com/2076-3417/14/17/7682",
+    "code": null
+  },
+  "topics": [
+    "复杂地形",
+    "两轮自平衡",
+    "地形识别",
+    "稳定控制"
+  ],
+  "relevance": "High",
+  "reading_basis": "abstract_only",
+  "quick_read": {
+    "tldr": "直接面向复杂地形的两轮重载自平衡车辆：将地形识别、摩擦估计与 PID 调参组合，用于改善不同地面上的平衡运行。",
+    "problem_and_motivation": "不平整或非规则地面会带来外部扰动和轮地条件变化，增加两轮自平衡车辆失稳、侧翻或无法行驶的风险。",
+    "core_method": "构建复杂地形下的运动学模型；用车载图像识别地形并估计摩擦条件，再针对地形调整姿态、速度和加速度控制。摘要指出识别网络为轻量化 LA-MobileNet，并加入坐标注意力和辅助损失。",
+    "key_results": "摘要报告系统在不同地形上实现稳定平衡控制，但未给出可核对的数值指标或实验边界。",
+    "why_it_matters": "研究对象和环境与本课题高度相近，可作为越野场景系统方案的直接参照；需要阅读全文后确认模型、控制通道和横向稳定性是否被单独评估。"
+  },
+  "detail": {
+    "motivation": "两轮自平衡车在不平整地面上的轮地接触与摩擦会变化，单一固定控制参数难以保证稳定。本文尝试把地形类别识别引入控制参数调整。当前记录基于出版方页面及可访问摘要；尚未核对全文中的实验设计和限制。",
+    "contributions": [
+      {
+        "contribution": "提出面向复杂地形的两轮自平衡车辆运动学建模与稳定控制系统。",
+        "source": "Abstract"
+      },
+      {
+        "contribution": "将图像地形识别与摩擦条件估计接入针对地形的控制调节流程。",
+        "source": "Abstract"
+      },
+      {
+        "contribution": "摘要报告轻量化 LA-MobileNet 用于地形分类，并报告不同地形上的稳定平衡实验。",
+        "source": "Abstract"
+      }
+    ],
+    "research_questions": [],
+    "research_questions_empty_reason": null,
+    "research_questions_empty_source": null,
+    "method": "摘要描述的流程包括：建立复杂地形下的车辆运动学模型；用车载相机采集路面图像；以轻量化 LA-MobileNet 区分地形，并据此确定摩擦系数；再用 PID 调整车辆姿态、速度和加速度。摘要未交代传感器融合、横滚/侧倾状态定义、地形类别数量和参数切换策略细节。",
+    "experiments_and_key_findings": "摘要称实验覆盖不同地形，并报告车辆可实现稳定平衡运行。由于尚未获取并核对正文，具体地面材料、坡度/粗糙度范围、对照组、稳定性指标和统计结果均不在本条中补写。",
+    "limitations": {
+      "author_reported": [
+        "当前详细报告依据出版方摘要与元数据，未能取得并核对正文；因此不能据此确认作者报告的完整限制。"
+      ],
+      "ai_analysis": [
+        "摘要未展示定量横向稳定性指标，无法判断方法对侧倾/横滚风险的改善幅度。",
+        "图像地形分类到摩擦系数映射可能受光照、泥水、松散度及轮胎状态影响；摘要不足以说明泛化范围。",
+        "所述系统把地形类别作为控制调整依据，摘要没有说明快速地形过渡、混合接触或突发冲击下的闭环稳定边界。"
+      ]
+    },
+    "relation_to_research": "这是现有种子论文中与“复杂越野环境 + 两轮自平衡”最直接的一篇。它提供地形感知—摩擦估计—控制调节的系统思路；本课题可进一步聚焦横向/侧倾动力学、质心偏置、轮地接触力与抗侧翻边界。应阅读全文后再决定其模型和实验能否直接迁移。",
+    "what_can_be_done_next": [
+      {
+        "title": "核实地形分类到摩擦估计的实现",
+        "rationale": "摘要把地形识别与摩擦系数确定作为控制适应的关键环节，但缺少细节。",
+        "concrete_plan": "阅读全文提取训练数据、类别定义、摩擦标定方式、网络输入输出及嵌入式推理开销，并整理可复现实验条件。",
+        "validation": "在光照变化、湿滑/松散表面和未见地面上报告分类准确率、摩擦估计误差与端侧时延。",
+        "expected_value": "判断视觉地形标签是否足以支撑快速越野控制，还是需要 IMU/轮速等在线接触反馈。",
+        "source": "Abstract"
+      },
+      {
+        "title": "把侧倾稳定状态并入地形自适应控制",
+        "rationale": "本文主题是复杂地形平衡，但摘要没有说明横向姿态和侧翻边界是否被单独评估。",
+        "concrete_plan": "在地形条件模型中补充横滚角/角速度、左右轮法向力差和横向质心运动状态，比较地形调度 PID 与滚转约束控制。",
+        "validation": "在横坡、单轮越障和交叉轴地形上比较最大侧倾角、轮荷转移、恢复时间和牵引饱和。",
+        "expected_value": "把“不同地形可平衡”转化为可量化的横向稳定能力。",
+        "source": "Abstract"
+      },
+      {
+        "title": "阅读全文并复核稳定性结论",
+        "rationale": "目前依据仅为摘要，不能审查实验范围和结果强度。",
+        "concrete_plan": "读取引言、方法、实验与讨论，记录地形类型、机器人参数、控制器对照、误差曲线和失稳案例，再更新阅读依据。",
+        "validation": "将详细记录中的每项结论对应到正文页码、图表或章节。",
+        "expected_value": "避免把摘要层面的定性结论误当作已验证的越野侧向稳定结论。",
+        "source": "Publisher abstract"
+      }
+    ]
+  },
+  "original_abstract": "In complex terrain, such as uneven roads or irregular terrain, two-wheeled heavy-duty self-balancing vehicles are easily affected by external interference factors, causing rollover or rendering the vehicle unable to move, which poses a greater challenge to their stability control. This paper studies a stability control system for a two-wheeled self-balancing vehicle under complex terrain. It establishes a terrain-aware kinematic model, uses PID control to adjust attitude, speed, and acceleration, and applies a lightweight terrain-recognition network to estimate terrain friction. Experiments are reported to show stable balance across different terrains.",
+  "bibtex": "@article{yan2024complexTerrain, title={Research on Stability Control System of Two-Wheel Heavy-Load Self-Balancing Vehicles in Complex Terrain}, author={Yan, Chunxiang and Li, Xiying}, journal={Applied Sciences}, volume={14}, number={17}, pages={7682}, year={2024}, doi={10.3390/app14177682}}",
+  "figures": [],
+  "evidence": [],
+  "generated_by": "Miaojy Research Library bootstrap (source-grounded synthesis)",
+  "generated_at": "2026-09-23T07:00:00Z",
+  "updated_at": "2026-09-23T07:00:00Z",
+  "owner_edited": false
+}

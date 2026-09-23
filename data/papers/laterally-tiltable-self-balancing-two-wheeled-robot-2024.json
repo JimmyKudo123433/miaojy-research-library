@@ -1,0 +1,120 @@
+{
+  "id": "laterally-tiltable-self-balancing-two-wheeled-robot-2024",
+  "title": "A Dynamic Model and Turning Strategy of a Laterally-Tiltable and Self-Balancing Two-Wheeled Robot",
+  "authors": [
+    "Wei-Shun Yu",
+    "Pei-Chun Lin"
+  ],
+  "year": 2024,
+  "publication_date": "2024-06-25",
+  "venue_or_source": "International Journal of iRobotics, 7(1), 1–7",
+  "venue_type": "Journal",
+  "ranking": {
+    "ccf": null,
+    "cas": null,
+    "jcr": null,
+    "ranking_year": null,
+    "ranking_source": null
+  },
+  "identifiers": {
+    "doi": null,
+    "arxiv": null,
+    "openreview": null
+  },
+  "urls": {
+    "paper": "https://iroboticsjournal.org/index.php/irobotics/article/view/178",
+    "code": null
+  },
+  "topics": [
+    "横向主动倾转",
+    "两轮自平衡",
+    "转向控制",
+    "拉格朗日建模"
+  ],
+  "relevance": "High",
+  "reading_basis": "full_text",
+  "quick_read": {
+    "tldr": "在两轮自平衡平台上增加主动横向倾转自由度，以独立倾转实现转向，并用实验比较其与传统差速转向对平衡状态的影响。",
+    "problem_and_motivation": "高质心两轮车在转弯时容易发生横向倾覆；传统差速电压转向会与车体平衡/前进控制耦合。",
+    "core_method": "用平行四连杆和蜗杆机构让车体主动侧倾；通过拉格朗日法建立增加倾转自由度的动力学模型，分别设计车体俯仰平衡与侧倾控制，并利用侧倾角构造转向策略。",
+    "key_results": "实验显示，倾转转向下车体状态误差 RMS 与直行接近；固定前进轮速 50°/s、以 10°倾角转向时，论文报告的状态变化比 0.5 V 差分电压转向平稳，传统方式存在更明显振荡甚至不收敛情况。",
+    "why_it_matters": "这是“横向稳定控制”最直接的机制/控制参考，可帮助拆分车体纵向俯仰平衡与横向侧倾/转向耦合。"
+  },
+  "detail": {
+    "motivation": "传统两轮倒立摆平台依靠驱动轮同时完成平衡和运动，欠驱动特性使转向命令与姿态稳定耦合；高质心也使高速转弯时更容易侧向倾覆。本文研究增加主动侧倾自由度是否能改善转向过程。",
+    "contributions": [
+      {
+        "contribution": "设计通过平行四连杆与蜗杆驱动的主动侧倾机构，以较低回驱性实现车体横向倾转。",
+        "source": "Sections II and VI"
+      },
+      {
+        "contribution": "建立带额外倾转自由度的两轮自平衡机器人拉格朗日动力学模型，并据此设计俯仰与侧倾控制。",
+        "source": "Sections III–IV"
+      },
+      {
+        "contribution": "提出利用倾角控制转向的方法，并以实车实验比较倾转转向与差分电压转向。",
+        "source": "Sections IV–V"
+      }
+    ],
+    "research_questions": [
+      {
+        "type": "inferred",
+        "question": "增加主动横向倾转自由度，能否在保留两轮自平衡的同时实现更平稳、可控的转向？",
+        "original_question": null,
+        "how": "作者建立额外侧倾自由度的动力学模型，分别设计俯仰和倾角控制，再进行静态平衡、前进平衡和转向实验，并与差分电压方法比较。",
+        "answer": "实验结果支持该机制可实现转向且不显著恶化所测车体平衡状态；本文验证的是所测试平台与工况下的效果。",
+        "meaning": "侧倾可作为单独可控状态参与横向运动规划，为越野平台研究滚转稳定和侧向载荷调节提供结构参考。",
+        "source": "Introduction, Sections II–V"
+      }
+    ],
+    "research_questions_empty_reason": null,
+    "research_questions_empty_source": null,
+    "method": "机械上，左右轮模块通过平行四连杆连接车体，蜗杆传动驱动连杆使车体横向倾转。建模采用拉格朗日方程，控制上将车体俯仰平衡和倾角控制设计为两个系统；利用机构的自锁/不可回驱特性减小转向与平衡控制的直接耦合。转向实验以固定轮速为基准改变倾角，并与左右轮差分电压法对照。",
+    "experiments_and_key_findings": "论文分别报告静止平衡、前进平衡、主动倾角和转向实验。转向实验在轮速 50°/s 下比较 0.5 V 差分电压和 10°倾角命令。作者报告传统差分电压法导致转向速度不稳定、俯仰范围变大，停止转向时可能出现振荡或无法稳定收敛；倾转方式下状态变化接近不转向前进实验，RMS 对照支持其控制有效。表 III 给出不同轮速与倾角下的转弯半径。",
+    "limitations": {
+      "author_reported": [
+        "论文指出所用相机测量转弯半径，而非直接由里程计获得；模型中的部分机构/轮胎动力学采用简化处理。"
+      ],
+      "ai_analysis": [
+        "验证环境是实验平台上的转弯与平衡工况，未覆盖松软、碎石、坡地或单侧冲击。",
+        "主动倾转改善转向姿态，不等同于已证明越野侧翻鲁棒性；需评估横坡、左右轮附着不一致及机构行程/功率边界。",
+        "所示效果依赖特定机械机构和参数，迁移到重载小车需要重新标定质量、质心、轮胎与执行器约束。"
+      ]
+    },
+    "relation_to_research": "本课题关注横向稳定，而本文直接操纵横向倾角，并把姿态与转向控制分开，是强相关的结构与控制基线。可以在其状态空间上加入横坡角、横向冲击、轮荷转移、地面摩擦和越障激励，从“平整场地转向”扩展到复杂越野下的抗侧翻控制。",
+    "what_can_be_done_next": [
+      {
+        "title": "复现实验中的侧倾—转弯曲线",
+        "rationale": "论文已给出轮速、倾角与转弯半径的实验关系。",
+        "concrete_plan": "从表 III 和图 5–7 提取轮速/倾角/半径与三体状态 RMS，建立无倾转与主动倾转两种控制基线。",
+        "validation": "在相同轮速和轨迹半径下比较俯仰 RMS、横滚角、轮速差、转向误差和执行器功耗。",
+        "expected_value": "为越野控制提供可复用的主动倾转控制对照。",
+        "source": "Sections IV–V, Table III"
+      },
+      {
+        "title": "扩展到横坡和交叉轴地形",
+        "rationale": "当前实验展示地面转向，横向地形坡度会改变重力矩和左右轮载荷。",
+        "concrete_plan": "在模型中加入地形横滚角、左右轮接触高度差和法向力约束；设计横滚参考角随坡度和侧向加速度变化的控制律。",
+        "validation": "用可调横坡台架测试斜坡静止、坡面转弯、单轮越障与横坡过渡，记录侧翻裕度和轮离地率。",
+        "expected_value": "判断主动倾转机构是否能把转向姿态控制扩展为越野侧倾补偿。",
+        "source": "Sections III–V"
+      },
+      {
+        "title": "把摩擦与轮荷转移纳入倾转控制",
+        "rationale": "正文说明倾角影响左右轮法向载荷与滑移，复杂地形会进一步改变接地条件。",
+        "concrete_plan": "以 IMU、轮速和驱动电流估计左右轮滑移与轮荷变化，给倾角命令增加牵引/饱和约束。",
+        "validation": "在低附着和左右摩擦不对称路面上比较轮速滑差、姿态误差、轨迹误差及失稳次数。",
+        "expected_value": "降低倾转转弯在松散地面上把稳定性问题转化成打滑问题的风险。",
+        "source": "Section V"
+      }
+    ]
+  },
+  "original_abstract": "This paper describes a two-wheel balancing robot that actively changes its lateral posture to facilitate turning. It develops a mechanism and control strategy for both self-balancing and lateral motion, derives a dynamic model using the Lagrangian approach, and experimentally compares the tiltable robot with a robot without the tilting mechanism.",
+  "bibtex": "@article{yu2024tiltable, title={A Dynamic Model and Turning Strategy of a Laterally-Tiltable and Self-Balancing Two-Wheeled Robot}, author={Yu, Wei-Shun and Lin, Pei-Chun}, journal={International Journal of iRobotics}, volume={7}, number={1}, pages={1--7}, year={2024}}",
+  "figures": [],
+  "evidence": [],
+  "generated_by": "Miaojy Research Library bootstrap (source-grounded synthesis)",
+  "generated_at": "2026-09-23T07:00:00Z",
+  "updated_at": "2026-09-23T07:00:00Z",
+  "owner_edited": false
+}

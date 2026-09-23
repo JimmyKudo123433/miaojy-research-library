@@ -1,0 +1,121 @@
+{
+  "id": "adaptive-surface-control-two-wheeled-balance-robot-2017",
+  "title": "Adaptive control of two-wheeled mobile balance robot capable to adapt different surfaces using a novel artificial neural network-based real-time switching dynamic controller",
+  "authors": [
+    "Ali Unluturk",
+    "Omer Aydogdu"
+  ],
+  "year": 2017,
+  "publication_date": "2017-04-05",
+  "venue_or_source": "International Journal of Advanced Robotic Systems, 14(2)",
+  "venue_type": "Journal",
+  "ranking": {
+    "ccf": null,
+    "cas": null,
+    "jcr": null,
+    "ranking_year": null,
+    "ranking_source": null
+  },
+  "identifiers": {
+    "doi": "10.1177/1729881417700893",
+    "arxiv": null,
+    "openreview": null
+  },
+  "urls": {
+    "paper": "https://journals.sagepub.com/doi/10.1177/1729881417700893",
+    "code": null
+  },
+  "topics": [
+    "松散地面",
+    "地形自适应",
+    "神经网络",
+    "增益切换",
+    "两轮自平衡"
+  ],
+  "relevance": "High",
+  "reading_basis": "official_html",
+  "quick_read": {
+    "tldr": "用姿态误差、位移误差和控制输出作为特征，让 ANN 识别土壤、碎石、沙地并切换对应 PID 参数；在真实两轮平台上验证不同松散地面的平衡改善。",
+    "problem_and_motivation": "大多数两轮平衡控制研究针对坚实平地；土壤、碎石和沙地的动力响应不同，固定控制参数会带来更大姿态摆动和位移漂移。",
+    "core_method": "用 Lagrange–Euler 建立两轮机器人模型；以 IMU 的加速度计和陀螺仪经 Kalman filter 估计倾角；ANN 根据 MATADE、MATDDE、MACO 三项滑窗统计量识别地面，再切换为地面对应的 PID 控制器参数。",
+    "key_results": "作者在 soil、pebble、sand 三种地面进行实时测试。论文表 4 中 pebble 上倾角范围由传统控制的 −8°…7° 收窄为 −5°…6°，sand 上由 −6°…5° 收窄为 −4°…4°；位移变化与控制输出范围也收窄。",
+    "why_it_matters": "提供低成本、传感器可得的在线地面适应基线；可与视觉地形识别或更直接的轮地滑移/横滚反馈比较。"
+  },
+  "detail": {
+    "motivation": "作者指出既有两轮移动平衡机器人多在单一、坚实表面上验证。松散地面改变机器人响应，因此同一组控制器参数无法在 soil、pebble、sand 上维持相同平衡性能。",
+    "contributions": [
+      {
+        "contribution": "设计并实机实现 ANN 驱动的地面分类与 PID 参数切换控制结构。",
+        "source": "Introduction; Sections 4–5"
+      },
+      {
+        "contribution": "以倾角误差、位移误差和控制器输出的均值绝对值构造地面识别特征。",
+        "source": "Section 4, Equations 22–24"
+      },
+      {
+        "contribution": "在 soil、pebble、sand 三种地面上比较传统与自适应控制，报告姿态、位移和控制输出波动降低。",
+        "source": "Section 5, Table 4"
+      }
+    ],
+    "research_questions": [
+      {
+        "type": "inferred",
+        "question": "利用机器人自身平衡响应识别松散地面并切换控制器参数，是否能比单一经典控制器更稳地适应多种地面？",
+        "original_question": null,
+        "how": "机器人在 soil、pebble、sand 地面采集倾角、位移与控制输出，ANN 分类后切换到地面对应 PID 参数，并开展实时对照实验。",
+        "answer": "作者报告三种地面上的姿态/位移摆动和控制输入范围总体缩小，支持该控制器在所测地面上的有效性。",
+        "meaning": "可在缺少高精度外部地图或视觉语义时，通过本体响应实现接触条件适应。",
+        "source": "Introduction; Sections 4–5"
+      }
+    ],
+    "research_questions_empty_reason": null,
+    "research_questions_empty_source": null,
+    "method": "机器人为两轮欠驱动平台，使用左右直流电机和编码器；IMU 加速度计/陀螺仪经 Kalman filter 估计车体倾角。动力学由 Lagrange–Euler 方法推导。地面分类特征为 20 个采样段上计算的 MATADE（目标倾角绝对误差均值）、MATDDE（目标位移绝对误差均值）和 MACO（控制输入绝对值均值）；ANN 输出三类地面标签，控制器据此选用对应 PID 参数。参数经仿真初调和实车界面微调。",
+    "experiments_and_key_findings": "实验平台在土壤、碎石、沙地上进行无外部扰动平衡试验。作者称每类地面以统一参数记录两分钟数据、每类约 12,000 个原始样本，再系统抽样形成分类特征。表 4 显示：pebble 倾角变化区间从经典控制约 −8°…7° 变为 ANN 切换控制约 −5°…6°；sand 从 −6°…5° 变为 −4°…4°。对应位移变化和控制输出范围也变小。",
+    "limitations": {
+      "author_reported": [
+        "作者指出松散土壤、碎石和沙地会产生快速变化，地面变形显著影响平衡表现。"
+      ],
+      "ai_analysis": [
+        "只覆盖三种预设地面类别，类别外输入、地面过渡区和地面语义变化未充分说明。",
+        "分类器依赖机器人已发生的姿态/位移/控制响应，可能存在识别滞后；并不等同于越野突发侧向冲击测试。",
+        "研究控制变量主要是纵向倾角和平衡输出，没有评估横滚角、左右轮载荷转移、侧坡和侧翻边界。"
+      ]
+    },
+    "relation_to_research": "这篇工作给出了从本体传感器响应识别地面并调度控制增益的简洁基线，且地面包括砂、石和土。Miaojy 的研究可以沿用其“地面变化—参数适应”思路，但需将目标拓展为横滚/侧倾稳定，补入左右轮受力不均、越障冲击和接触丢失等越野横向工况。",
+    "what_can_be_done_next": [
+      {
+        "title": "把分类特征改为横向稳定特征",
+        "rationale": "本文特征集中于倾角、位移和控制输入，未直接描述横滚风险。",
+        "concrete_plan": "加入横滚角/角速度、左右轮速差、左右电机电流差、横向加速度和滑移指标，比较原三特征与扩展特征。",
+        "validation": "按地面留一法评估分类泛化，并在侧坡、单轮压石和横向扰动中记录横滚峰值与恢复时间。",
+        "expected_value": "让地面自适应与横向失稳风险建立更直接联系。",
+        "source": "Section 4"
+      },
+      {
+        "title": "测试地面切换期间的参数平滑性",
+        "rationale": "方法将地面识别结果映射到离散 PID 参数，过渡过程可能造成控制跳变。",
+        "concrete_plan": "记录分类置信度和切换时刻，比较硬切换、迟滞切换与参数插值三种策略。",
+        "validation": "在两种材料拼接的地面上重复正反方向穿越，计算姿态峰值、控制输入变化率和错误切换次数。",
+        "expected_value": "提高异质越野地面边界上的闭环平顺性与可重复性。",
+        "source": "Sections 4–5"
+      },
+      {
+        "title": "从预设地面类切换到在线接触估计",
+        "rationale": "离散地面类别对未见表面和局部软硬变化的覆盖有限。",
+        "concrete_plan": "保留 ANN 调参框架，同时用轮速/机体加速度/电流估计连续等效附着与沉陷特征。",
+        "validation": "用未参与训练的湿土、松砂和碎石混合路面测试估计误差及横向稳定指标。",
+        "expected_value": "减少对固定地面标签的依赖，提升场景迁移能力。",
+        "source": "Conclusion"
+      }
+    ]
+  },
+  "original_abstract": "A real-time artificial neural network-based adaptable switching dynamic controller is developed and implemented for a two-wheeled balance robot on different surfaces. Mean absolute target angle deviation, target displacement deviation, and controller output are used by an ANN to estimate the surface. The robot tilt is estimated by a Kalman filter from accelerometer and gyroscope signals. Real-time experiments compare the controller on soil, pebble, and sand with classic controllers.",
+  "bibtex": "@article{unluturk2017adaptive, title={Adaptive control of two-wheeled mobile balance robot capable to adapt different surfaces using a novel artificial neural network-based real-time switching dynamic controller}, author={Unluturk, Ali and Aydogdu, Omer}, journal={International Journal of Advanced Robotic Systems}, volume={14}, number={2}, year={2017}, doi={10.1177/1729881417700893}}",
+  "figures": [],
+  "evidence": [],
+  "generated_by": "Miaojy Research Library bootstrap (source-grounded synthesis)",
+  "generated_at": "2026-09-23T07:00:00Z",
+  "updated_at": "2026-09-23T07:00:00Z",
+  "owner_edited": false
+}

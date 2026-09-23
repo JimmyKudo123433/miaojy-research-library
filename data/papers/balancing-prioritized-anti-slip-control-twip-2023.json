@@ -1,0 +1,111 @@
+{
+  "id": "balancing-prioritized-anti-slip-control-twip-2023",
+  "title": "Balancing-Prioritized Anti-Slip Control of a Two-Wheeled Inverted Pendulum Robot Vehicle on Low-Frictional Surfaces with an Acceleration Slip Indicator",
+  "authors": [
+    "Yongkuk Kim",
+    "Sangjoo Kwon"
+  ],
+  "year": 2023,
+  "publication_date": null,
+  "venue_or_source": "Machines, 11(5), 553",
+  "venue_type": "Journal",
+  "ranking": {
+    "ccf": null,
+    "cas": null,
+    "jcr": null,
+    "ranking_year": null,
+    "ranking_source": null
+  },
+  "identifiers": {
+    "doi": "10.3390/machines11050553",
+    "arxiv": null,
+    "openreview": null
+  },
+  "urls": {
+    "paper": "https://www.mdpi.com/2075-1702/11/5/553",
+    "code": null
+  },
+  "topics": [
+    "低附着地面",
+    "抗滑控制",
+    "牵引控制",
+    "两轮倒立摆",
+    "IMU与轮速"
+  ],
+  "relevance": "High",
+  "reading_basis": "abstract_only",
+  "quick_read": {
+    "tldr": "针对低附着地面的轮滑导致失稳问题，提出以平衡优先的抗滑控制：用 IMU 与轮编码器构造加速度滑移指示器，检测打滑后限制可传递扭矩。",
+    "problem_and_motivation": "两轮倒立摆在湿滑/低摩擦地面上失去轮胎牵引后，平衡控制器可能继续增加驱动命令，进一步恶化姿态稳定。",
+    "core_method": "根据最大可传递扭矩估计进行抗滑控制；只在基于 IMU 与轮编码器数据的加速度滑移指示器触发后介入，优先维持平衡。",
+    "key_results": "摘要报告通过对比仿真和实验展示低摩擦表面上的有效性与可行性，但当前记录未核对正文中的指标、轮胎/地面参数和控制器细节。",
+    "why_it_matters": "抗滑与侧向稳定相互影响：左右轮附着不均会引起偏航/横滚扰动；需避免平衡控制在轮胎饱和时继续索取不可实现的力。"
+  },
+  "detail": {
+    "motivation": "两轮倒立摆车辆的姿态稳定依赖驱动轮提供足够牵引力。低摩擦表面发生轮滑后，牵引损失可能直接威胁姿态稳定，因此控制策略需要在平衡优先的前提下处理打滑。当前报告基于出版方摘要。",
+    "contributions": [
+      {
+        "contribution": "提出基于最大可传递扭矩估计的两轮倒立摆抗滑方法。",
+        "source": "Abstract"
+      },
+      {
+        "contribution": "设计使用 IMU 与轮编码器数据的加速度滑移指示器，仅在检测到滑移时触发抗滑控制。",
+        "source": "Abstract"
+      },
+      {
+        "contribution": "摘要报告通过对比仿真和实验证明低附着表面上的方法有效性与可行性。",
+        "source": "Abstract"
+      }
+    ],
+    "research_questions": [],
+    "research_questions_empty_reason": null,
+    "research_questions_empty_source": null,
+    "method": "摘要描述的控制逻辑为：由 IMU 与轮编码器计算加速度滑移指示量；当指标判定轮滑发生时，基于最大可传递扭矩估计介入抗滑控制，并把维持车体平衡置于牵引恢复目标之前。阈值、扭矩估计公式、控制器结构及传感器滤波细节需阅读全文确认。",
+    "experiments_and_key_findings": "摘要说明研究进行了比较仿真和实验，并报告在低摩擦表面上可应对打滑且维持姿态稳定。摘要没有呈现地面摩擦系数、最大传递扭矩误差、姿态误差、对照算法或重复试验数值，因此不在此补写定量结论。",
+    "limitations": {
+      "author_reported": [
+        "当前详细报告依据出版方摘要与元数据，未能取得并核对正文；不能确认作者报告的全部实验边界和限制。"
+      ],
+      "ai_analysis": [
+        "摘要没有表明是否测试左右轮附着不对称；这一工况对越野横向稳定特别关键。",
+        "加速度滑移指标可能受冲击、轮胎跳动、地面振动与 IMU 噪声影响，需评估误触发和检测延迟。",
+        "最大可传递扭矩估计对地面附着变化与轮荷转移的适应机制尚待核实。"
+      ]
+    },
+    "relation_to_research": "越野环境中的砂石、泥土和局部湿滑会令左右轮摩擦不一致；抗滑控制可避免横向稳定控制在轮胎已饱和时继续索取不可实现的力。后续应把滑移指标与横滚稳定裕度、轮荷转移协同评估。",
+    "what_can_be_done_next": [
+      {
+        "title": "阅读全文提取可复现的扭矩估计和触发规则",
+        "rationale": "现有摘要说明了关键方法组件，却没有可用于复现的阈值和公式。",
+        "concrete_plan": "读取方法、实验与讨论，逐项记录扭矩上限估计、滑移判据、滤波、采样频率及控制切换过程。",
+        "validation": "将论文公式和参数重建到仿真，并与作者报告曲线/表格比对。",
+        "expected_value": "确定其传感器需求和实时部署复杂度。",
+        "source": "Publisher abstract"
+      },
+      {
+        "title": "评估左右轮摩擦不对称下的横向扰动",
+        "rationale": "左右轮附着差可能造成偏航与横滚耦合，而摘要未说明是否覆盖该情况。",
+        "concrete_plan": "在双轮独立可调附着的仿真与台架中改变左右轮摩擦系数，接入抗滑触发与侧倾稳定控制。",
+        "validation": "对比最大横滚角、航向偏差、滑移率、轮端扭矩饱和时长和恢复成功率。",
+        "expected_value": "检验平衡优先抗滑策略能否支撑越野横向稳定目标。",
+        "source": "Abstract"
+      },
+      {
+        "title": "融合滑移与轮荷转移指标",
+        "rationale": "地面坡度和障碍会改变轮荷，使允许传递扭矩动态变化。",
+        "concrete_plan": "将 IMU/轮速滑移指示与估计的左右轮法向载荷结合，按实时轮荷更新扭矩边界。",
+        "validation": "在侧坡、交叉轴与单轮越障条件下比较固定扭矩限幅和轮荷感知限幅。",
+        "expected_value": "提升地面变化时的牵引可用性，同时控制侧翻风险。",
+        "source": "Abstract"
+      }
+    ]
+  },
+  "original_abstract": "When a two-wheeled inverted pendulum robot travels on slippery roads, wheel slip threatens postural stability because of lost traction. This paper proposes a balancing-prioritized anti-slip method based on maximum transmissible torque estimation, activated when an acceleration slip indicator using IMU and wheel-encoder data detects slip. Comparative simulations and experiments are reported to demonstrate the method on low-friction surfaces while maintaining postural stability.",
+  "bibtex": "@article{kim2023antislip, title={Balancing-Prioritized Anti-Slip Control of a Two-Wheeled Inverted Pendulum Robot Vehicle on Low-Frictional Surfaces with an Acceleration Slip Indicator}, author={Kim, Yongkuk and Kwon, Sangjoo}, journal={Machines}, volume={11}, number={5}, pages={553}, year={2023}, doi={10.3390/machines11050553}}",
+  "figures": [],
+  "evidence": [],
+  "generated_by": "Miaojy Research Library bootstrap (source-grounded synthesis)",
+  "generated_at": "2026-09-23T07:00:00Z",
+  "updated_at": "2026-09-23T07:00:00Z",
+  "owner_edited": false
+}

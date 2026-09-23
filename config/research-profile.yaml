@@ -1,13 +1,18 @@
 profile:
-  researcher: 'Your Name'
-  library_name: 'Your Research Library'
-  description: '围绕你的研究方向，整理相关论文、方法与可复现研究证据。'
+  researcher: 'Miaojy'
+  library_name: 'Miaojy Research Library'
+  description: '围绕复杂越野环境中 Segway 式智能无人小车的横向稳定控制，整理两轮自平衡、地形适应、抗滑与鲁棒控制相关论文、方法和实验依据。'
 research_scope:
   primary:
-    - '你的研究方向'
-  secondary: []
+    - '复杂越野环境下 Segway 式智能无人小车的横向稳定控制'
+  secondary:
+    - 'Two-Wheeled Inverted Pendulum (TWIP)'
+    - '横向姿态与侧倾稳定控制'
+    - '非结构化地形建模与地形适应'
+    - '轮地接触、低附着与抗滑控制'
+    - '自适应、鲁棒与预测控制'
 paper_selection:
-  recent_year_window: 3
+  recent_year_window: 10
   priority: [quality, relevance]
   relevance_levels: [High, Medium, Low]
   ranking_systems: []
@@ -22,5 +27,5 @@ daily:
   timezone: 'Asia/Shanghai'
   scheduled_time: '08:00'
 editor:
-  owner_github_username: ''
+  owner_github_username: 'JimmyKudo123433'
   api_origin: ''

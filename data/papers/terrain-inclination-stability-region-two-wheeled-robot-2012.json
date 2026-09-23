@@ -1,0 +1,121 @@
+{
+  "id": "terrain-inclination-stability-region-two-wheeled-robot-2012",
+  "title": "The Effect of Terrain Inclination on Performance and the Stability Region of Two-Wheeled Mobile Robots",
+  "authors": [
+    "Zareena Kausar",
+    "Karl Stol",
+    "Nitish Patel"
+  ],
+  "year": 2012,
+  "publication_date": null,
+  "venue_or_source": "International Journal of Advanced Robotic Systems, 9, 218",
+  "venue_type": "Journal",
+  "ranking": {
+    "ccf": null,
+    "cas": null,
+    "jcr": null,
+    "ranking_year": null,
+    "ranking_source": null
+  },
+  "identifiers": {
+    "doi": "10.5772/52894",
+    "arxiv": null,
+    "openreview": null
+  },
+  "urls": {
+    "paper": "https://journals.sagepub.com/doi/10.5772/52894",
+    "code": null
+  },
+  "topics": [
+    "坡地动力学",
+    "稳定域",
+    "两轮移动机器人",
+    "全状态反馈"
+  ],
+  "relevance": "High",
+  "reading_basis": "full_text",
+  "quick_read": {
+    "tldr": "建立含坡度/不平地形影响的两轮机器人动力学模型，并量化平地设计的全状态反馈控制器在坡地上的性能和稳定域变化。",
+    "problem_and_motivation": "Segway 式倒立摆机器人在坡地与不平地面上会受轮地接触角和重力分量影响；平地控制器直接用于坡地可能使平衡域缩小。",
+    "core_method": "推导水平、倾斜与一般不平地面的非线性动力学；在水平地面上设计速度跟踪全状态反馈控制器，再将同一控制器用于坡地仿真，并用数值方法估计稳定域边界。",
+    "key_results": "同一控制器下，坡度和速度增加会延长俯仰稳定时间并扩大超调；论文报告其设计性能标准仅在坡度不超过 10° 且目标速度低于 0.5 m/s 时满足。稳定域随坡度改变并缩小。",
+    "why_it_matters": "为越野横向稳定控制提供方法论：必须显式建模地形、评估闭环稳定域，而不只比较单一平衡轨迹。"
+  },
+  "detail": {
+    "motivation": "两轮机器人在平地上已有多种稳定控制器，但户外应用要求机器人在斜坡和不平地面行驶。地形会改变轮地接触角、接触力与平衡动态，因此平地设计的闭环稳定性不一定保持。",
+    "contributions": [
+      {
+        "contribution": "提出考虑坡地与不平地形的两轮移动机器人动力学模型，并给出斜坡/平地的约化形式。",
+        "source": "Introduction; Section 2"
+      },
+      {
+        "contribution": "提出基于数值仿真的稳定域边界估计流程，用于比较环境变化造成的闭环可恢复状态范围。",
+        "source": "Introduction; Sections 4–5"
+      },
+      {
+        "contribution": "展示坡度对平地设计全状态反馈控制器的性能、平衡点和稳定域的影响。",
+        "source": "Abstract; Sections 3–5"
+      }
+    ],
+    "research_questions": [
+      {
+        "type": "inferred",
+        "question": "地形坡度会怎样改变两轮移动机器人的速度跟踪表现、平衡状态和闭环稳定域？",
+        "original_question": null,
+        "how": "作者建立坡地与不平地形动力学，在平地上设计全状态反馈控制器，再对非线性系统进行不同坡度下的仿真和稳定域估计。",
+        "answer": "论文报告坡度增加会改变平衡点并降低稳定域，同时增大俯仰稳定时间和速度超调；其设计标准仅在小于等于 10° 且目标速度低于 0.5 m/s 时满足。",
+        "meaning": "地形参数应进入模型与稳定性评估，控制器性能应以扰动/初始状态的恢复范围衡量。",
+        "source": "Introduction, Section 6 Results and Discussion"
+      }
+    ],
+    "research_questions_empty_reason": null,
+    "research_questions_empty_source": null,
+    "method": "论文将两轮平台建模为车轮与中间车体组成的非线性系统，分别写出一般不平地面、斜坡和平地模型。控制器按水平平地工作点线性化并设计全状态反馈与速度跟踪；同一控制器应用到倾斜地面非线性模型。通过数值积分扫描不同初始状态，估计俯仰、速度等状态对的稳定域边界。",
+    "experiments_and_key_findings": "研究以仿真为主，不是越野实车验证。作者采用 4 秒调节时间、零稳态误差和最小超调作为控制性能标准；结果显示速度和轮地接触角增大时俯仰调节时间增加，影响在地形坡度约 20°及以上更明显。论文报告性能标准仅在坡度不高于 10°、目标速度低于 0.5 m/s 时满足。稳定域图显示随坡度变化的状态边界，说明平地稳定结论不能简单外推到坡地。",
+    "limitations": {
+      "author_reported": [
+        "本文聚焦模型与数值仿真；作者将实时控制器设计与实现视为后续研究方向。"
+      ],
+      "ai_analysis": [
+        "模型和评估以二维纵向俯仰/坡度为主，不能直接回答横向侧倾、横坡或左右轮接触差异。",
+        "结果是特定平台参数和给定控制器下的稳定域，不代表不同载荷、轮胎或地形粗糙度下的统一安全界限。",
+        "论文以确定性模型为基础，实际越野中附着变化、轮胎沉陷、冲击和传感器不确定性需要额外评估。"
+      ]
+    },
+    "relation_to_research": "这是 Segway 类两轮车在坡地稳定性的基础建模与稳定域参考。它支持将地形作为动力学变量、绘制横向可恢复域的路线，但需要将二维纵坡模型扩展到三维横坡/侧倾、轮载差和非平整地形冲击。",
+    "what_can_be_done_next": [
+      {
+        "title": "由纵向坡度模型扩展到横向侧倾稳定域",
+        "rationale": "原文定义稳定域并研究坡度影响，但其地形模型和状态主要针对纵向平面。",
+        "concrete_plan": "在非线性模型中加入横滚姿态、横向角速度、横坡角及左右轮法向载荷，定义包含侧翻边界的恢复域。",
+        "validation": "对比平地、横坡、斜向坡和横向单轮抬升下稳定域面积/边界，并用仿真初值网格复核。",
+        "expected_value": "形成与复杂越野横向稳定控制目标直接对应的可计算指标。",
+        "source": "Sections 2 and 4"
+      },
+      {
+        "title": "加入地形预瞄和负载变化",
+        "rationale": "研究指出坡地改变平衡点，固定在平地设计的反馈无法覆盖更大的地形范围。",
+        "concrete_plan": "把坡度/地形估计与质心载荷变化作为调度变量，比较固定反馈、增益调度和约束 MPC。",
+        "validation": "扫描坡度、速度、载荷与估计误差，统计约束违反率、稳定恢复时间和驱动饱和。",
+        "expected_value": "明确何种预瞄精度与控制余量才能维持安全稳定域。",
+        "source": "Sections 3 and 6"
+      },
+      {
+        "title": "用实车横坡与不平路实验检验模型",
+        "rationale": "作者模型强调地形效应，但当前结论以数值仿真为主。",
+        "concrete_plan": "先在可调斜坡与左右高度差平台上辨识轮地接触参数，再比较模型预测稳定边界和真实机器人恢复边界。",
+        "validation": "报告姿态误差、轮离地事件、稳定恢复成功率和模型边界预测误差。",
+        "expected_value": "确认稳定域分析是否能作为越野控制的实际安全指标。",
+        "source": "Conclusion"
+      }
+    ]
+  },
+  "original_abstract": "This paper studies how inclined terrain affects the performance and stability region of two-wheeled mobile robots. It proposes a dynamic model for inclined and uneven terrain, designs a full-state-feedback controller for speed tracking on horizontal terrain, and evaluates the same controller on inclined terrain. The results show equilibrium-point variation and a reduced stability region on inclined terrain.",
+  "bibtex": "@article{kausar2012terrain, title={The Effect of Terrain Inclination on Performance and the Stability Region of Two-Wheeled Mobile Robots}, author={Kausar, Zareena and Stol, Karl and Patel, Nitish}, journal={International Journal of Advanced Robotic Systems}, volume={9}, pages={218}, year={2012}, doi={10.5772/52894}}",
+  "figures": [],
+  "evidence": [],
+  "generated_by": "Miaojy Research Library bootstrap (source-grounded synthesis)",
+  "generated_at": "2026-09-23T07:00:00Z",
+  "updated_at": "2026-09-23T07:00:00Z",
+  "owner_edited": false
+}
